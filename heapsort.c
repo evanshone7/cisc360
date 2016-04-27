@@ -19,9 +19,9 @@ main() {
     printf("\n");
 }*/
 
-void heapsort(int a[],int n) {
+void myheapsort(int* a,int n) {
     int i,t;
-    heapify(a,n);
+    heapify (a,n);
     for (i=n-1;i>0;i--) {
         t = a[0];
         a[0] = a[i];
@@ -31,7 +31,7 @@ void heapsort(int a[],int n) {
 }
 
 
-void heapify(int a[],int n) {
+void heapify(int* a,int n) {
     int k,i,j,item;
     for (k=1;k<n;k++) {
         item = a[k];
@@ -45,7 +45,7 @@ void heapify(int a[],int n) {
         a[i] = item;
     }
 }
-void adjust(int a[],int n) {
+void adjust(int* a,int n) {
     int i,j,item;
     j = 0;
     item = a[j];
@@ -63,6 +63,3 @@ void adjust(int a[],int n) {
     }
     a[j] = item;
 }
-
-
-

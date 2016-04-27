@@ -1,9 +1,9 @@
 #include "quicksort.h"
-void quicksort(long int arr[]) {
-    quicksort_body(arr, arr[0],  arr[sizeof(arr)/sizeof(arr[0])]);
+void quicksort(int* arr, int n) {
+  quicksort_body(arr, 0, n);
 }
 
-void quicksort_body(long int arr[], int left, int right) {       
+void quicksort_body(int* arr, int left, int right) {       
     int i = left, j = right;  
     int tmp;
     int pivot = arr[(left + right) / 2];
@@ -21,8 +21,8 @@ void quicksort_body(long int arr[], int left, int right) {
         } 
     }
     if (left < j)
-        quickSort(arr, left, j);  
+        quicksort_body(arr, left, j);  
     if (i < right)
-        quickSort(arr, i, right);   
+        quicksort_body(arr, i, right);   
 }
 
