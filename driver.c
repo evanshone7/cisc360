@@ -20,18 +20,17 @@ int HEAP = 2;
 int PERCENT_SWAP = 10;
 
 int **arrays;
-int *block; 
+int *block;
 
-void (*p[3]) (int *array, int size);
+typedef void (*sortfunction_t) (int *array, int size);
+
+sortfunction_t ALGORITHMS[3] = { my_quicksort, my_mergesort, my_heapsort };
 
 //main function begins...
 int main( int argc, const char* argv[] ){
     // array of function pointers
-    p[0] = my_quicksort;
-    p[1] = my_mergesort;
-    p[2] = my_heapsort;
 
-    printBreak();    
+    printBreak();
     printf("Sort:\n\t0: quicksort\n\t1: mergesort\n\t2: heapsort\n");
     printf("Array:\n\t0: random\n\t1: in_order\n");
     printf("\t2: reverse\n\t3: nearly_sorted\n");
@@ -45,7 +44,7 @@ int main( int argc, const char* argv[] ){
     }
     return 0;
 }
-    
+
 void timeSort(int sortType, int arraySize) {
     clock_t t;
     /* arrays[0] = random
@@ -67,7 +66,7 @@ void timeSort(int sortType, int arraySize) {
         (*p[sortType]) (arrays[i], arraySize);
         gettimeofday(&after, NULL);
         printf("TEST\n");
-        printf("sort:%d, array:%d, time:%lf\n", 
+        printf("sort:%d, array:%d, time:%lf\n",
                 sortType, i, time_diff(before, after));
     }
     free(arrays[0]);
