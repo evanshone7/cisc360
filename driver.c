@@ -20,7 +20,6 @@ int HEAP = 2;
 int PERCENT_SWAP = 10;
 
 int **arrays;
-int *block;
 
 typedef void (*sortfunction_t) (int *array, int size);
 
@@ -52,8 +51,8 @@ void timeSort(int sortType, int arraySize) {
      * arrays[2] = reverse
      * arrays[3] = nearly_sorted
      */
-    arrays = malloc(sizeof(int) * arraySize * 4);
-    block = malloc(sizeof(int*)*4);
+    arrays = (int **) malloc(sizeof(int *) * 4);
+    int *block = (int *) malloc(sizeof(int) * arraySize * 4);
     for (int i = 0; i < 4; i++) {
         arrays[i] = block + i * arraySize;
     }
@@ -63,9 +62,8 @@ void timeSort(int sortType, int arraySize) {
     struct timeval before, after;
     for (int i = 0; i < 4; i++) {
         gettimeofday(&before, NULL);
-        (*ALGORITHMS[sortType]) (arrays[i], arraySize);
+//        (*ALGORITHMS[sortType]) (arrays[i], arraySize);
         gettimeofday(&after, NULL);
-        printf("TEST\n");
         printf("sort:%d, array:%d, time:%lf\n",
                 sortType, i, time_diff(before, after));
     }
@@ -75,7 +73,6 @@ void timeSort(int sortType, int arraySize) {
 
 void createArrays(int arraySize, int **arrays) {
     // fill the arrays with data
-    int temp;
     for (int i = 0; i < arraySize; i++) {
         arrays[0][i] = (int) (rand() % arraySize);
         arrays[1][i] = i;
