@@ -15,6 +15,8 @@ int QUICK = 0;
 int MERGE = 1;
 int HEAP = 2;
 
+int PERCENT_SWAP = 10;
+
 void (*p[3]) (int *array, int size);
 
 //main function begins...
@@ -24,18 +26,15 @@ int main( int argc, const char* argv[] ){
     p[1] = my_mergesort;
     p[2] = my_heapsort;
     
-    int size = 100000;
-    //Quicksort
-    printf("Quicksort is being tested with size %d...\n", size);
-    timeSort(QUICK, size);
+    printf("Sort:\n\t0:quicksort\n\t1:mergesort\n\t2:heapsort\n");
+    printf("Array:\n\t0:random\n\t1:in_order\n\t2:reverse\n\t3:nearly_sorted\n");
 
-    // Mergesort 
-    printf("Mergesort is being tested with size %d...\n", size);
-    timeSort(MERGE, size);
-
-    // Heapsort
-    printf("Heapsort is being tested with size %d...\n", size);
-    timeSort(HEAP, size);
+    for (int size = 10; size < 1000000; size *= 10) {
+        printf("Array Size:%di\n", size);
+        timeSort(QUICK, size);
+        timeSort(MERGE, size);
+        timeSort(HEAP, size);
+    }
     return 0;
 }
     
@@ -53,12 +52,13 @@ int main( int argc, const char* argv[] ){
         }
         // fill the arrays
         createArrays(arraySize, arrays);
-        
         // time the execution
-        t = clock();
-        (*p[sortType]) (random, arraySize);
-        t = clock() - t;
-        printf("sort:%d, \ttime:%lu\n", sortType, t/CLOCKS_PER_SEC);
+        for (int i = 0; i < 4; i++) {
+            t = clock();
+            (*p[sortType]) (arrays[i], arraySize);
+            t = clock() - t;
+            printf("sort:%d,\tarray:%d,\ttime:%lu\n", sortType, i, t/CLOCKS_PER_SEC);
+        }
         free(arrays[0]);
         free(arrays);
 
@@ -67,7 +67,7 @@ int main( int argc, const char* argv[] ){
     void createArrays(int arraySize, int **arrays) {
         // fill the arrays with data
         for (int i = 0; i < arraySize; i++) {
-            arrays[0][i] = rand() % arraySize;
+            arrays[0][i] = (int) (rand() % arraySize);
             arrays[1][i] = i;
             arrays[2][i] = arraySize - i;
             arrays[3][i] = i;
