@@ -80,15 +80,7 @@ void createArrays(int arraySize, int **arrays) {
         arrays[0][i] = (int) (rand() % arraySize);
         arrays[1][i] = i;
         arrays[2][i] = arraySize - i;
-        if(i % 100 == 0){   // swap the current number with current number -1 when i is divided by 100
-            temp == array[3][i];
-            array[3][i] = array[3][i--];
-            array[3][i--] == temp;
-        }
-        else{
         arrays[3][i] = i;
-        }
-
     }
     // TODO - swap some entries of nearly_sorted
 }
