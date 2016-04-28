@@ -65,7 +65,7 @@ int main( int argc, const char* argv[] ){
     }
 
     void createArrays(int arraySize, int **arrays) {
-
+        // fill the arrays with data
         for (int i = 0; i < arraySize; i++) {
             arrays[0][i] = rand() % arraySize;
             arrays[1][i] = i;
