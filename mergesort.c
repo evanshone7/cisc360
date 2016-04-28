@@ -14,11 +14,11 @@ void mergesort_body(int* arr, int len) {
 	arrleft = (int*)malloc(sizeof(int) * lenleft);
 	arrright  = (int*)malloc(sizeof(int) * lenright);
 	
-	for(i = 0, i < lenleft; i++) {
+	for(i = 0; i < lenleft; i++) {
 		arrleft[i] = arr[i];
 	}
 	
-	for(i = 0, i < lenright; i++) {
+	for(i = 0; i < lenright; i++) {
 		arrright[i] = arr[i + lenleft];
 	}
 	
