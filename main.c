@@ -25,6 +25,16 @@ int main(){
         array[i] = rand();
         printf(" %d", array[i]);
     }
+    
+     int array2[40] = {1,1,2,2,2,3,4,4,4,5,
+    		           3,7,8,8,8,9,1,20,15,11,
+					   11,12,13,13,13,14,2,16,11,16,
+					   17,17,18,18,18,19,19,20,20,20
+                       };
+    quicksort(array2,40);
+    mergesort_body(array2,40);
+    myheapsort(array2,40);
+
     beginQuick = clock();
     quicksort(array,1000);
     endQuick = clock();
@@ -38,6 +48,6 @@ int main(){
     endHeap = clock();
     timeHeap = (double)(endHeap-beginHeap)/ CLOCKS_PER_SEC;
 
-printf("%lf",&time);
+printf("Quick sort: %lf, Merge sort: %lf, Heap sort: %lf",&timeQuick, &timeMerge, &timeHeap);
 
 }
