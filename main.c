@@ -6,7 +6,7 @@
 #include "heapsort.h"
 #include "quicksort.h"
 
-
+clock_t time;
 int arraySize = 100000;
 int random[arraySize];
 int reverse[arraySize];
@@ -48,6 +48,18 @@ for(int l = 0; l < arraySize; l++){
   
   //main function begins...
   int main( int argc, const char* argv[] ){
+  
+  printf("\nWe begin by measuring the time to run our sorting algorithms without optimization...\n");
+  
+  printf("Quicksort is being tested...\n");
+  
+  
+  time = clock();
+  quicksort(inOrder[], arraySize);
+  time = clock() - time;
+  printf("Quicksort took " %f "seconds to run on an already sorted array.\n", (float time)/CLOCKS_PER_SEC);
+  
+  return 0;
   
   }
   
