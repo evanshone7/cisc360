@@ -63,7 +63,7 @@ void timeSort(int sortType, int arraySize) {
     struct timeval before, after;
     for (int i = 0; i < 4; i++) {
         gettimeofday(&before, NULL);
-        (*p[sortType]) (arrays[i], arraySize);
+        (*ALGORITHMS[sortType]) (arrays[i], arraySize);
         gettimeofday(&after, NULL);
         printf("TEST\n");
         printf("sort:%d, array:%d, time:%lf\n",
