@@ -33,6 +33,6 @@ veryclean : clean
 	-rm -vf $(DEPS)
 
 clean :
-	-rm -vf $(OBJS) $(wildcard driver-*)
+	-rm -vf $(OBJS) $(wildcard driver-*) driver
 
 -include $(DEPS)
