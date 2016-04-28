@@ -1,54 +1,43 @@
-#include <stdio.h>
-#include <stdlib.h>
+/*
+ * main.c
+ *
+ *  Created on: Apr 27, 2016
+ *      Author: Megan
+ */
+
 #include <time.h>
-
-#include "mergesort.h"
-#include "heapsort.h"
-#include "quicksort.h"
-
-
-int arraySize = 100000;
-int random[arraySize];
-int reverse[arraySize];
-int inOrder[arraySize];
-int nearlySorted[arraySize];
+#include<stdio.h>
+#include "heapsort.c"
+#include "quicksort.c"
+#include "mergesort.c"
+#include "heapsort.c"
 
 
-//Create arrays for testing 
 
-//inOrder array creation
-for(int i = 0; i < arraySize; i++){
-  inOrder[i] = i;
+int main(){
+    clock_t beginQuick, beginMerge,beginHeap,endQuick,endMerge,endHeap;
+
+    double timeQuick,timeMerge,timeHeap;
+    srand(0); // seed
+    int array[1000]; // generate 1000 random number in an array
+
+    for(int i=0; i<1000; i++){
+        array[i] = rand();
+        printf(" %d", array[i]);
+    }
+    beginQuick = clock();
+    quicksort(array,1000);
+    endQuick = clock();
+    timeQuick = (double)(endQuick-beginQuick)/CLOCKS_PER_SEC;
+    beginMerge = clock();
+    mergesort_body(array,1000);
+    endMerge = clock();
+    timeMerge = (double)(endMerge - beginMerge)/CLOCKS_PER_SEC;
+    beginHeap = clock();
+    myheapsort(array,1000);
+    endHeap = clock();
+    timeHeap = (double)(endHeap-beginHeap)/ CLOCKS_PER_SEC;
+
+printf("%lf",&time);
+
 }
-
-//reverse array creation
-for(int j = 0; j < arraySize; j++){
-  reverse[j] = arraySize - j;
-  }
-  
-//nearlySorted array creation
-for(int k = 0; k < arraySize; k++){
-
-  if(k = 99998 || k == 1){
-    nearlySorted[k] = 28;
-    }
-    
-  else{
-    nearlySorted[k] = k;
-    }
-    
-  }
-  
-//random array creation
-for(int l = 0; l < arraySize; l++){
-  int r = rand() % arraySize;
-  random[l] = r;
-  }
-  
-  
-  //main function begins...
-  int main( int argc, const char* argv[] ){
-  
-  }
-  
-  
