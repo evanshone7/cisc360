@@ -1,7 +1,8 @@
 #include "mergesort.h"
 
 void my_mergesort(int* arr, int len) {
-	if(len < 2) {
+return;
+    if(len < 2) {
 		return;
 	}
 	

@@ -34,7 +34,7 @@ int main( int argc, const char* argv[] ){
     printf("Array:\n\t0: random\n\t1: in_order\n");
     printf("\t2: reverse\n\t3: nearly_sorted\n");
 
-    for (int size = 10; size < 1000000; size *= 10) {
+    for (int size = 100; size < 100000000; size *= 10) {
         printBreak();
         printf("Array Size:%d\n", size);
         timeSort(QUICK, size);
@@ -62,7 +62,7 @@ void timeSort(int sortType, int arraySize) {
     struct timeval before, after;
     for (int i = 0; i < 4; i++) {
         gettimeofday(&before, NULL);
-//        (*ALGORITHMS[sortType]) (arrays[i], arraySize);
+        (*ALGORITHMS[sortType]) (arrays[i], arraySize);
         gettimeofday(&after, NULL);
         printf("sort:%d, array:%d, time:%lf\n",
                 sortType, i, time_diff(before, after));
