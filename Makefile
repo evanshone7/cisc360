@@ -28,7 +28,7 @@ all: $(TARGET)
 
 $(TARGET) : $(OBJS)
 	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
-	-rm -vf $(OBJS)
+#	-rm -vf $(OBJS)
 veryclean : clean
 	-rm -vf $(DEPS)
 

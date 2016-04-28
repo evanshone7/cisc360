@@ -9,7 +9,7 @@ void my_mergesort(int* arr, int len) {
 	int lenleft, lenright;
 	int *arrleft, *arrright;
 	
-	lenleft = len / 2;
+	lenleft = (len + 1)/ 2;
 	lenright = len - lenleft;
 	arrleft = (int*)malloc(sizeof(int) * lenleft);
 	arrright  = (int*)malloc(sizeof(int) * lenright);
