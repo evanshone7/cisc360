@@ -3,7 +3,7 @@ CFLAGS := -std=c99 -MMD
 # LOADLIBES := -L/usr/local/lib 
 # LDLIBS := -lboost_system
 
-TARGET := driver
+TARGET := driver-O0
 ifdef DEBUG
   CFLAGS += -g
 endif
@@ -33,6 +33,6 @@ veryclean : clean
 	-rm -vf $(DEPS)
 
 clean :
-	-rm -vf $(OBJS) $(wildcard driver-*) driver
+	-rm -vf $(OBJS) $(wildcard driver-*)
 
 -include $(DEPS)
