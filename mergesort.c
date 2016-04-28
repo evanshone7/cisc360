@@ -1,6 +1,6 @@
 #include "mergesort.h"
 
-void mergesort_body(int* arr, int len) {
+void my_mergesort(int* arr, int len) {
 	if(len < 2) {
 		return;
 	}
@@ -22,8 +22,8 @@ void mergesort_body(int* arr, int len) {
 		arrright[i] = arr[i + lenleft];
 	}
 	
-	mergesort_body(arrleft, lenleft);
-	mergesort_body(arrright, lenright);
+	my_mergesort(arrleft, lenleft);
+	my_mergesort(arrright, lenright);
 	
 	merge(arrleft, arrright, lenleft, lenright, arr);
 	free(arrleft);

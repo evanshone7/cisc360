@@ -1,5 +1,5 @@
 #include "quicksort.h"
-void quicksort(int* arr, int n) {
+void my_quicksort(int* arr, int n) {
   quicksort_body(arr, 0, n);
 }
 

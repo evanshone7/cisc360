@@ -19,7 +19,7 @@ main() {
     printf("\n");
 }*/
 
-void myheapsort(int* a,int n) {
+void my_heapsort(int* a,int n) {
     int i,t;
     heapify (a,n);
     for (i=n-1;i>0;i--) {

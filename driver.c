@@ -7,23 +7,23 @@
 #include "quicksort.h"
 
 void printTime(char *sortType, char *arrayType, float time);
+void timeSort(int sortType, int arraySize);
+
+void createArrays(int arraySize, int **array);
 
 int QUICK = 0;
 int MERGE = 1;
 int HEAP = 2;
 
-int (*p[3]) (int *array, int size);
+void (*p[3]) (int *array, int size);
 
 //main function begins...
 int main( int argc, const char* argv[] ){
     // array of function pointers
-    p[0] = quicksort;
-    p[1] = mergesort;
-    p[2] = myheapsort;
-
-    printf("\nWe begin by measuring the time to 
-            run our sorting algorithms without optimization...\n");
-  
+    p[0] = my_quicksort;
+    p[1] = my_mergesort;
+    p[2] = my_heapsort;
+    
     int size = 100000;
     //Quicksort
     printf("Quicksort is being tested with size %d...\n", size);
@@ -41,43 +41,37 @@ int main( int argc, const char* argv[] ){
     
     void timeSort(int sortType, int arraySize) {
         clock_t t;
-        int random[arraySize];
-        int reverse[arraySize];
-        int inOrder[arraySize];
-        int nearlySorted[arraySize];
+        /* arrays[0] = random
+         * arrays[1] = in_order
+         * arrays[2] = reverse
+         * arrays[3] = nearly_sorted
+         */
+        int **arrays = malloc(sizeof(int) * arraySize * 4);
+        int *block = malloc(sizeof(int*)*4);
+        for (int i = 0; i < 4; i++) {
+            arrays[i] = block + i * arraySize;
+        }
         // fill the arrays
-        createArrays(arraySize, random, reverse, inOrder, nearlySorted);
+        createArrays(arraySize, arrays);
         
         // time the execution
         t = clock();
         (*p[sortType]) (random, arraySize);
         t = clock() - t;
-        printf("sort:%d, \ttime:%f\n", sortType, t/CLOCKS_PER_SEC);
+        printf("sort:%d, \ttime:%lu\n", sortType, t/CLOCKS_PER_SEC);
+        free(arrays[0]);
+        free(arrays);
 
     }
 
-    void createArrays(int arraySize, int *random, int *reverse, 
-                        int *inOrder, int *nearlySorted)
-        //inOrder array creation
-        for(int i = 0; i < arraySize; i++)
-            inOrder[i] = i;
+    void createArrays(int arraySize, int **arrays) {
 
-        //reverse array creation
-        for(int j = 0; j < arraySize; j++)
-            reverse[j] = arraySize - j;
-  
-        //nearlySorted array creation
-        for(int k = 0; k < arraySize; k++){
-            if(k = 99998 || k == 1){
-                nearlySorted[k] = 28;
-            } else {
-                nearlySorted[k] = k;
-            }
+        for (int i = 0; i < arraySize; i++) {
+            arrays[0][i] = rand() % arraySize;
+            arrays[1][i] = i;
+            arrays[2][i] = arraySize - i;
+            arrays[3][i] = i;
         }
-  
-        //random array creation
-        for(int l = 0; l < arraySize; l++){
-            int r = rand() % arraySize;
-            random[l] = r;
-        }
+        // TODO - swap some entries of nearly_sorted
+
     }
