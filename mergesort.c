@@ -2,13 +2,32 @@
 
 //in-place merge implementation found from: http://stackoverflow.com/questions/2571049/how-to-sort-in-place-using-the-merge-sort-algorithm
 
+/* 
+ * sort xs[l, u), and put result to working area w. 
+ * constraint, len(w) == u - l
+ * Thus inputted array should have EXTRA FREE EMPTY SPACE
+ * Can't find the exact number of the extra length so lets just give it 1.5x the space.
+ */
+void my_mergesort(int* xs, int l, int u, int w) {
+    int m;
+    if (u - l > 1) {
+        m = l + (u - l) / 2;
+        imsort(xs, l, m);
+        imsort(xs, m, u);
+        wmerge(xs, l, m, m, u, w);
+    }
+    else
+        while (l < u)
+            swap(xs, l++, w++);
+}
+
 /* Parameters: (variable names follow this dtructure throughout the program)
  * Array is represented like so: [array1|array2|working area]
  *	xs: the array
  *	i: start of first subarray
  *	m: end of first subarray
  *	j: start of second subarray
- *	k: end of second subarray area
+ *	n: end of second subarray area
  *	w: working area
  */
 void wmerge(int* xs, int i, int m, int j, int n, int w) {
@@ -22,29 +41,14 @@ void wmerge(int* xs, int i, int m, int j, int n, int w) {
 
 void imsort(int* xs, int l, int u);
 
+//basic swap function
 void swap(int* xs, int i, int j) {
     int tmp = xs[i];
     xs[i] = xs[j];
     xs[j] = tmp;
 }
 
-/* 
- * sort xs[l, u), and put result to working area w. 
- * constraint, len(w) == u - l
- */
-void wsort(int* xs, int l, int u, int w) {
-    int m;
-    if (u - l > 1) {
-        m = l + (u - l) / 2;
-        imsort(xs, l, m);
-        imsort(xs, m, u);
-        wmerge(xs, l, m, m, u, w);
-    }
-    else
-        while (l < u)
-            swap(xs, l++, w++);
-}
-
+//the sort
 void imsort(int* xs, int l, int u) {
     int m, n, w;
     if (u - l > 1) {
