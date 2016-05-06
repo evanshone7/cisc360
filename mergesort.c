@@ -2,13 +2,18 @@
 
 //in-place merge implementation found from: http://stackoverflow.com/questions/2571049/how-to-sort-in-place-using-the-merge-sort-algorithm
 
+
+void my_mergesort(int *xs, int size) {
+    my_mergesort_body(xs, 0, 0, 0);
+}
+
 /* 
  * sort xs[l, u), and put result to working area w. 
  * constraint, len(w) == u - l
  * Thus inputted array should have EXTRA FREE EMPTY SPACE
  * Can't find the exact number of the extra length so lets just give it 1.5x the space.
  */
-void my_mergesort(int* xs, int l, int u, int w) {
+void my_mergesort_body(int* xs, int l, int u, int w) {
     int m;
     if (u - l > 1) {
         m = l + (u - l) / 2;
@@ -39,7 +44,6 @@ void wmerge(int* xs, int i, int m, int j, int n, int w) {
         swap(xs, w++, j++);
 }
 
-void imsort(int* xs, int l, int u);
 
 //basic swap function
 void swap(int* xs, int i, int j) {
@@ -54,11 +58,11 @@ void imsort(int* xs, int l, int u) {
     if (u - l > 1) {
         m = l + (u - l) / 2;
         w = l + u - m;
-        wsort(xs, l, m, w); /* the last half contains sorted elements */
+        //wsort(xs, l, m, w); /* the last half contains sorted elements */
         while (w - l > 2) {
             n = w;
             w = l + (n - l + 1) / 2;
-            wsort(xs, w, n, l);  /* the first half of the previous working area contains sorted elements */
+            //wsort(xs, w, n, l);  /* the first half of the previous working area contains sorted elements */
             wmerge(xs, l, l + n - w, n, u, w);
         }
         for (n = w; n > l; --n) /*switch to insertion sort*/
