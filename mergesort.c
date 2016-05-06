@@ -32,7 +32,7 @@ return;
 }
 
 void merge(int *left, int *right, int leftlen, int rightlen, int *fullarr) {
-	int i, j, k = 0;
+	int i = 0, j = 0, k = 0;
 	
 	while (i < leftlen && j < rightlen) {
 		if(left[i] <= right[j]) {

@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -std=c99 -MMD
+CFLAGS := -std=c99 -MMD -Wall -Wextra -Werror
 # LOADLIBES := -L/usr/local/lib 
 # LDLIBS := -lboost_system
 
