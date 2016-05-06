@@ -16,13 +16,14 @@ int compare(const void *a, const void *b);
 void deepCopy(int *copy, int *OG, int size);
 void checkCorrectness();
 int sameArray(int *a, int *b, int size);
+void printArray(int *a, int size);
 
 int QUICK = 0;
 int MERGE = 1;
 int HEAP = 2;
 
 int PERCENT_SWAP = 10;
-int TEST_SIZE = 1000;
+int TEST_SIZE = 10;
 
 int **arrays;
 
@@ -85,6 +86,8 @@ void timeSort(int sortType, int arraySize) {
 }
 
 void createArrays(int arraySize, int **arrays) {
+    // seed 
+    srand(time(NULL)); 
     // fill the arrays with data
     for (int i = 0; i < arraySize; i++) {
         arrays[0][i] = (int) (rand() % arraySize);
@@ -103,20 +106,27 @@ void checkCorrectness() {
     test = (int *) malloc (sizeof(int) * TEST_SIZE);
     correct = (int *) malloc (sizeof(int) * TEST_SIZE);
     
+    // make random array
+    srand(time(NULL));
     for (int i = 0; i < TEST_SIZE; i++) 
         OG[i] = (int) (rand() % TEST_SIZE);
     
-
+    // get correct
     deepCopy(correct, OG, TEST_SIZE);
     qsort(correct, TEST_SIZE, sizeof(int), compare);
-
+    
+    // check each one against correct
     for (int i = 0; i < 3; i++) {
         deepCopy(test, OG, TEST_SIZE);
         (*ALGORITHMS[i]) (test, TEST_SIZE);
         if (sameArray(correct, test, TEST_SIZE)) 
             printf("sort:%d is correct\n", i);
-        else 
+        else { 
             printf("sort:%d is incorrect\n", i);
+            printArray(test, TEST_SIZE);
+            printArray(correct, TEST_SIZE);
+            printf("\n");
+        }
     }
 
     free(OG);
@@ -158,4 +168,13 @@ void deepCopy(int *copy, int *OG, int size) {
 /* pretty self explanatory */
 void printBreak() {
     printf("--------------------------------------------------\n");
+}
+
+/* prints the array */
+void printArray(int *a, int size) {
+    printf("{");
+    for (int i = 0; i < size; i++)
+        printf("%d,", a[i]);
+
+    printf("}\n");
 }

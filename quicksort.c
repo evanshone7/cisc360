@@ -20,9 +20,11 @@ void quicksort_body(int* arr, int left, int right) {
             j--;  
         } 
     }
-    if (left < j)
+    if (i > j) 
+        return;
+    if (j > 0)
         quicksort_body(arr, left, j);  
-    if (i < right)
+    if (i > 0)
         quicksort_body(arr, i, right);   
 }
 
