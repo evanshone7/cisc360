@@ -26,7 +26,7 @@ typedef void (*sortfunction_t) (int *array, int size);
 sortfunction_t ALGORITHMS[3] = { my_quicksort, my_mergesort, my_heapsort };
 
 //main function begins...
-int main( int argc, const char* argv[] ){
+int main(){
     // array of function pointers
 
     printBreak();
@@ -45,7 +45,6 @@ int main( int argc, const char* argv[] ){
 }
 
 void timeSort(int sortType, int arraySize) {
-    clock_t t;
     /* arrays[0] = random
      * arrays[1] = in_order
      * arrays[2] = reverse
