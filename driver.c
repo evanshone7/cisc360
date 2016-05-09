@@ -45,7 +45,7 @@ int main(){
     
     printBreak(); 
     printf("Time the sorts\n");
-    for (int size = 100; size < 100000000; size *= 10) {
+    for (int size = 100; size < 100000; size *= 10) {
         printBreak();
         printf("Array Size:%d\n", size);
         printBreak();
