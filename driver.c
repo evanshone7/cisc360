@@ -23,7 +23,7 @@ int MERGE = 1;
 int HEAP = 2;
 
 int PERCENT_SWAP = 10;
-int TEST_SIZE = 10;
+int TEST_SIZE = 20;
 
 int **arrays;
 
@@ -31,7 +31,6 @@ typedef void (*sortfunction_t) (int *array, int size);
 
 sortfunction_t ALGORITHMS[3] = { my_quicksort, my_mergesort, my_heapsort };
 
-//main function begins...
 int main(){ 
     printBreak();
     printf("Sort:\n\t0: quicksort\n\t1: mergesort\n\t2: heapsort\n");
@@ -70,9 +69,9 @@ void timeSort(int sortType, int arraySize) {
     for (int i = 0; i < 4; i++) {
         arrays[i] = block + i * arraySize;
     }
-    // fill the arrays
+    /* fill the arrays */
     createArrays(arraySize, arrays);
-    // time the execution
+    /* time the execution */
     struct timeval before, after;
     for (int i = 0; i < 4; i++) {
         gettimeofday(&before, NULL);
@@ -86,16 +85,25 @@ void timeSort(int sortType, int arraySize) {
 }
 
 void createArrays(int arraySize, int **arrays) {
-    // seed 
+    /* seed */
     srand(time(NULL)); 
-    // fill the arrays with data
+    /* fill the arrays with data */
     for (int i = 0; i < arraySize; i++) {
         arrays[0][i] = (int) (rand() % arraySize);
         arrays[1][i] = i;
         arrays[2][i] = arraySize - i;
         arrays[3][i] = i;
     }
-    // TODO - swap some entries of nearly_sorted
+    
+    /* swap random indexes */
+    float numberOfSwaps = arraySize * (PERCENT_SWAP/100);
+    for (int i = 0; i < numberOfSwaps; i++) {
+        int a = (int) (rand() % arraySize);
+        int b = (int) (rand() % arraySize);
+        int temp = arrays[3][a];
+        arrays[3][a] = arrays[3][b];
+        arrays[3][b] = temp;
+    }
 }
 
 /* check if the sorts are correct */
@@ -106,16 +114,16 @@ void checkCorrectness() {
     test = (int *) malloc (sizeof(int) * TEST_SIZE);
     correct = (int *) malloc (sizeof(int) * TEST_SIZE);
     
-    // make random array
+    /* make random array */
     srand(time(NULL));
     for (int i = 0; i < TEST_SIZE; i++) 
         OG[i] = (int) (rand() % TEST_SIZE);
     
-    // get correct
+    /* get correct */
     deepCopy(correct, OG, TEST_SIZE);
     qsort(correct, TEST_SIZE, sizeof(int), compare);
     
-    // check each one against correct
+    /* check each one against correct */
     for (int i = 0; i < 3; i++) {
         deepCopy(test, OG, TEST_SIZE);
         (*ALGORITHMS[i]) (test, TEST_SIZE);
@@ -125,7 +133,6 @@ void checkCorrectness() {
             printf("sort:%d is incorrect\n", i);
             printArray(test, TEST_SIZE);
             printArray(correct, TEST_SIZE);
-            printf("\n");
         }
     }
 
@@ -173,8 +180,10 @@ void printBreak() {
 /* prints the array */
 void printArray(int *a, int size) {
     printf("{");
-    for (int i = 0; i < size; i++)
-        printf("%d,", a[i]);
-
+    char* delim = "";
+    for (int i = 0; i < size; i++) {
+        printf("%s%d", delim, a[i]);
+        delim = ",";
+    }
     printf("}\n");
 }
