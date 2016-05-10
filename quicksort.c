@@ -16,10 +16,9 @@ void quicksort_body( int a[], int l, int r) {
                                                         
 }
 
-
-
 int partition( int a[], int l, int r) {
-    int pivot, i, j, t;
+    int pivot, i, j, t;i
+    // CHOOSE A BETTER PIVOT NINTHER()
     pivot = a[l];
     i = l; j = r+1;
                     
