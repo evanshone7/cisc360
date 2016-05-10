@@ -45,7 +45,7 @@ int main(){
     
     printBreak(); 
     printf("Time the sorts\n");
-    for (int size = 100; size < 100000; size *= 10) {
+    for (int size = 100; size < 10000000; size *= 10) {
         printBreak();
         printf("Array Size:%d\n", size);
         printBreak();
@@ -118,7 +118,11 @@ void checkCorrectness() {
     srand(time(NULL));
     for (int i = 0; i < TEST_SIZE; i++) 
         OG[i] = (int) (rand() % TEST_SIZE);
-    
+   
+    printBreak();
+    printf("OG array\n");
+    printArray(OG, TEST_SIZE);
+    printBreak();
     /* get correct */
     deepCopy(correct, OG, TEST_SIZE);
     qsort(correct, TEST_SIZE, sizeof(int), compare);

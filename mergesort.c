@@ -4,7 +4,7 @@
 
 
 void my_mergesort(int *xs, int size) {
-    my_mergesort_body(*xs, 0, size - 1);
+    my_mergesort_body(xs, 0, size - 1);
 }
 
 /* 
