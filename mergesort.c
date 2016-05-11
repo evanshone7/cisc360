@@ -4,13 +4,12 @@
 
 
 void my_mergesort(int *xs, int size) {
-    my_mergesort_body(xs, 0, size - 1);
+    my_mergesort_body(xs, 0, size);
 }
 
 /* 
  * sort xs[l, u), and put result to working area w. 
  * constraint, len(w) == u - l
- * Can't find the exact number of the extra length so lets just give it 1.5x the space.
  */
 void wsort(int* xs, int l, int u, int w) {
     int m;
@@ -57,11 +56,11 @@ void my_mergesort_body(int* xs, int l, int u) {
     if (u - l > 1) {
         m = l + (u - l) / 2;
         w = l + u - m;
-        //wsort(xs, l, m, w); /* the last half contains sorted elements */
+        wsort(xs, l, m, w);
         while (w - l > 2) {
             n = w;
             w = l + (n - l + 1) / 2;
-            //wsort(xs, w, n, l);  /* the first half of the previous working area contains sorted elements */
+            wsort(xs, w, n, l);
             wmerge(xs, l, l + n - w, n, u, w);
         }
         for (n = w; n > l; --n) /*switch to insertion sort*/
