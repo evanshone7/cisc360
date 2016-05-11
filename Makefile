@@ -1,7 +1,7 @@
 CC := gcc
-CFLAGS := -std=c99 -MMD -Wall -Wextra -Werror
-# LOADLIBES := -L/usr/local/lib 
-# LDLIBS := -lboost_system
+CFLAGS := -std=gnu99 -MMD -Wall -Wextra -Werror
+# LOADLIBES := -L/usr/local/lib
+LDLIBS := -lrt
 
 TARGET := driver-O0
 ifdef DEBUG
