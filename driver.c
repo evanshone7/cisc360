@@ -8,7 +8,7 @@
 #include "quicksort.h"
 
 void printTime(char *sortType, char *arrayType, float time);
-void timeSort(int sortType, int arraySize);
+void timeSort(int sortType, int arraySize, FILE* fp);
 void printBreak();
 void createArrays(int arraySize, int **array);
 double time_diff(struct timeval x, struct timeval y);
@@ -32,6 +32,8 @@ typedef void (*sortfunction_t) (int *array, int size);
 sortfunction_t ALGORITHMS[3] = { my_quicksort, my_mergesort, my_heapsort };
 
 int main(){ 
+    FILE* fp;
+    fp = fopen("heap_output.txt","w+");
     printBreak();
     printf("Sort:\n\t0: quicksort\n\t1: mergesort\n\t2: heapsort\n");
     printf("Array:\n\t0: random\n\t1: in_order\n");
@@ -53,22 +55,22 @@ int main(){
         printf("\n");
         timeSort(MERGE, size);
         printf("\n"); */
-        timeSort(HEAP, size);
+        timeSort(HEAP, size,fp);
     }
     for (int size = 1000000; size < 1000000000; size *= 2.5) {
 	    printBreak();
 	    printf("Array Size:%d\n", size);
 	    printBreak();
-	    /*  timeSort(QUICK, size);
+	   /*  timeSort(QUICK, size);
 	     *          printf("\n");
 	     *                  timeSort(MERGE, size);
 	     *                          printf("\n"); */
-	    timeSort(HEAP, size);
-    }
+	    timeSort(HEAP, size,fp);
+    } 
     return 0;
 }
 
-void timeSort(int sortType, int arraySize) {
+void timeSort(int sortType, int arraySize, FILE* fp) {
     /* arrays[0] = random
      * arrays[1] = in_order
      * arrays[2] = reverse
@@ -89,6 +91,7 @@ void timeSort(int sortType, int arraySize) {
         gettimeofday(&after, NULL);
         printf("sort:%d, array:%d, time:%lf\n",
                 sortType, i, time_diff(before, after));
+	fprintf(fp,"%d,%d,%d,%lf\n",arraySize,sortType, i, time_diff(before, after));
     }
     free(arrays[0]);
     free(arrays);
