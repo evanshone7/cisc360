@@ -17,10 +17,14 @@ void deepCopy(int *copy, int *OG, int size);
 void checkCorrectness();
 int sameArray(int *a, int *b, int size);
 void printArray(int *a, int size);
+void qsort_wrap(int *a, int size);
 
 int QUICK = 0;
 int MERGE = 1;
 int HEAP = 2;
+int QSORT = 3;
+
+int NUM_SORTS = 4;
 
 int PERCENT_SWAP = 10;
 int TEST_SIZE = 20;
@@ -29,11 +33,12 @@ int **arrays;
 
 typedef void (*sortfunction_t) (int *array, int size);
 
-sortfunction_t ALGORITHMS[3] = { my_quicksort, my_mergesort, my_heapsort };
+sortfunction_t ALGORITHMS[4] = { my_quicksort, my_mergesort, my_heapsort, qsort_wrap };
 
 int main(){
   printBreak();
-  printf("Sort:\n\t0: quicksort\n\t1: mergesort\n\t2: heapsort\n");
+  printf("Sort:\n\t0: quicksort\n\t1: mergesort\n");
+  printf("\t2: heapsort\n\t3: qsort\n");
   printf("Array:\n\t0: random\n\t1: in_order\n");
   printf("\t2: reverse\n\t3: nearly_sorted\n");
 
@@ -54,6 +59,8 @@ int main(){
     timeSort(MERGE, size);
     printf("\n");
     timeSort(HEAP, size);
+    printf("\n");
+    timeSort(QSORT, size);
   }
   return 0;
 }
@@ -159,6 +166,9 @@ double time_diff(struct timespec x, struct timespec y) {
   return 1e3 * (y.tv_sec - x.tv_sec) + (1e-6 * (y.tv_nsec - x.tv_nsec));
 }
 
+void qsort_wrap(int *a, int size) {
+    qsort(a, size, sizeof(int), compare);
+}
 /* Taken from http://stackoverflow.com/questions/3893937/c-array-sorting-tips */
 int compare( const void* a, const void* b) {
   int int_a = * ( (int*) a );
