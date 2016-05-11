@@ -38,22 +38,32 @@ int main(){
     printf("\t2: reverse\n\t3: nearly_sorted\n");
 
     printBreak();
-    printf("Test the correctness of the sorts\n");
+   /* printf("Test the correctness of the sorts\n");
     printf("Size: %d, and qsort\n", TEST_SIZE);
     printBreak();
     checkCorrectness();
     
-    printBreak(); 
+    printBreak(); */
     printf("Time the sorts\n");
-    for (int size = 100; size < 10000000; size *= 10) {
+    for (int size = 100; size < 1000000; size *= 10) {
         printBreak();
         printf("Array Size:%d\n", size);
         printBreak();
-        timeSort(QUICK, size);
+      /*  timeSort(QUICK, size);
         printf("\n");
         timeSort(MERGE, size);
-        printf("\n");
+        printf("\n"); */
         timeSort(HEAP, size);
+    }
+    for (int size = 1000000; size < 1000000000; size *= 2.5) {
+	    printBreak();
+	    printf("Array Size:%d\n", size);
+	    printBreak();
+	    /*  timeSort(QUICK, size);
+	     *          printf("\n");
+	     *                  timeSort(MERGE, size);
+	     *                          printf("\n"); */
+	    timeSort(HEAP, size);
     }
     return 0;
 }
