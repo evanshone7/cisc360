@@ -50,7 +50,7 @@ int main(){
 
   printBreak();
   printf("Time the sorts\n");
-  for (int size = 100; size < 10000000; size *= 10) {
+  for (int size = 100000; size < 10000000; size *= 10) {
     printBreak();
     printf("Array Size:%d\n", size);
     printBreak();
@@ -92,8 +92,6 @@ void timeSort(int sortType, int arraySize) {
 }
 
 void createArrays(int arraySize, int **arrays) {
-  /* seed */
-  srand(time(NULL));
   /* fill the arrays with data */
   for (int i = 0; i < arraySize; i++) {
     arrays[0][i] = (int) (rand() % arraySize);
@@ -122,7 +120,6 @@ void checkCorrectness() {
   correct = (int *) malloc (sizeof(int) * TEST_SIZE);
 
   /* make random array */
-  srand(time(NULL));
   for (int i = 0; i < TEST_SIZE; i++)
     OG[i] = (int) (rand() % TEST_SIZE);
 
